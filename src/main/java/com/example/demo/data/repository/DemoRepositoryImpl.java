@@ -21,6 +21,16 @@ public class DemoRepositoryImpl implements DemoRepository {
   }
 
   @Override
+  public Mono<String> testMethodOneNoGenerics() {
+    return Mono.just(ONE);
+  }
+
+  @Override
+  public Mono<String> testMethodTwoNoGenerics() {
+    return Mono.just(TWO);
+  }
+
+  @Override
   public String simpleOne() {
     return ONE;
   }

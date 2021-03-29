@@ -21,6 +21,14 @@ public class TestService {
       .block();
   }
 
+  public String callMonoMethodsNoGenerics() {
+    Mono<String> one = demoRepository.testMethodOneNoGenerics();
+    Mono<String> two = demoRepository.testMethodTwoNoGenerics();
+    return Mono.zip(one, two)
+      .map(tuple -> tuple.getT1() + tuple.getT2())
+      .block();
+  }
+
   public String callSimpleMethods() {
     return demoRepository.simpleOne() + demoRepository.simpleTwo();
   }

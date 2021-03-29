@@ -39,6 +39,23 @@ class DemoApplicationTests {
   }
 
   @Test
+  void testMonoNoGenerics(@Capturing DemoRepository demoRepository) {
+    new Expectations() {{
+      demoRepository.testMethodOneNoGenerics();
+      result = Mono.just("monoone");
+      times = 1;
+
+      demoRepository.testMethodTwoNoGenerics();
+      result = Mono.just("monotwo");
+      times = 1;
+    }};
+
+    String result = testService.callMonoMethodsNoGenerics();
+
+    assertThat(result, is("monoonemonotwo"));
+  }
+
+  @Test
   void testMonoDemoRepositoryImpl(@Capturing DemoRepositoryImpl demoRepository) {
     new Expectations() {{
       demoRepository.testMethodOne();

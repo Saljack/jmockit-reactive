@@ -8,6 +8,10 @@ public interface DemoRepository  {
 
   Mono<String> testMethodTwo();
 
+  Mono testMethodOneNoGenerics();
+
+  Mono testMethodTwoNoGenerics();
+
   String simpleOne();
 
   String simpleTwo();
