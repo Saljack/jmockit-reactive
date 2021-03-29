@@ -4,9 +4,9 @@ import reactor.core.publisher.Mono;
 
 public interface DemoRepository  {
 
-  Mono testMethodOne();
+  Mono<String> testMethodOne();
 
-  Mono testMethodTwo();
+  Mono<String> testMethodTwo();
 
   String simpleOne();
 
