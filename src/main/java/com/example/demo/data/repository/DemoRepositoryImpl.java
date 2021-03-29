@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class CustomDemoRepositoryImpl implements CustomDemoRepository {
+public class DemoRepositoryImpl implements DemoRepository {
 
   private static final String ONE = "one";
   private static final String TWO = "two";

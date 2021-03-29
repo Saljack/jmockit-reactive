@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.data.repository.DemoRepository;
+import com.example.demo.data.repository.DemoRepositoryImpl;
 import com.example.demo.service.TestService;
 
 import mockit.Capturing;
@@ -25,9 +26,28 @@ class DemoApplicationTests {
     new Expectations() {{
       demoRepository.testMethodOne();
       result = Mono.just("monoone");
+      times = 1;
 
       demoRepository.testMethodTwo();
       result = Mono.just("monotwo");
+      times = 1;
+    }};
+
+    String result = testService.callMonoMethods();
+
+    assertThat(result, is("monoonemonotwo"));
+  }
+
+  @Test
+  void testMonoDemoRepositoryImpl(@Capturing DemoRepositoryImpl demoRepository) {
+    new Expectations() {{
+      demoRepository.testMethodOne();
+      result = Mono.just("monoone");
+      times = 1;
+
+      demoRepository.testMethodTwo();
+      result = Mono.just("monotwo");
+      times = 1;
     }};
 
     String result = testService.callMonoMethods();
@@ -40,9 +60,11 @@ class DemoApplicationTests {
     new Expectations() {{
       demoRepository.simpleOne();
       result = "simpleone";
+      times = 1;
 
       demoRepository.simpleTwo();
       result = "simpletwo";
+      times = 1;
     }};
 
     String result = testService.callSimpleMethods();

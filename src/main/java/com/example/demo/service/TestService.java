@@ -1,9 +1,28 @@
 package com.example.demo.service;
 
-public interface TestService {
+import org.springframework.stereotype.Service;
 
-  String callMonoMethods();
+import com.example.demo.data.repository.DemoRepository;
 
-  String callSimpleMethods();
+import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
+
+@Service
+@RequiredArgsConstructor
+public class TestService {
+
+  private final DemoRepository demoRepository;
+
+  public String callMonoMethods() {
+    Mono<String> one = demoRepository.testMethodOne();
+    Mono<String> two = demoRepository.testMethodTwo();
+    return Mono.zip(one, two)
+      .map(tuple -> tuple.getT1() + tuple.getT2())
+      .block();
+  }
+
+  public String callSimpleMethods() {
+    return demoRepository.simpleOne() + demoRepository.simpleTwo();
+  }
 
 }

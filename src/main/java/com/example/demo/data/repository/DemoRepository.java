@@ -1,8 +1,14 @@
 package com.example.demo.data.repository;
 
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import reactor.core.publisher.Mono;
 
-import com.example.demo.data.entity.DemoEntity;
+public interface DemoRepository  {
 
-public interface DemoRepository extends ReactiveMongoRepository<DemoEntity, String>, CustomDemoRepository {
+  Mono testMethodOne();
+
+  Mono testMethodTwo();
+
+  String simpleOne();
+
+  String simpleTwo();
 }
